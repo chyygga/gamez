@@ -1,15 +1,15 @@
-board = list(range(1, 10)) 
-win_comb = [(1, 2, 3), (4, 5, 6), (7, 8, 9), #Комбинации выйгрыша
+board = list(range(1, 10))
+win_comb = [(1, 2, 3), (4, 5, 6), (7, 8, 9),  # Комбинации выйгрыша
             (1, 4, 7), (2, 5, 8), (3, 6, 9),
             (1, 5, 9), (3, 5, 7)]
-            
+
 def drew_doard():
     ''' Функция рисует игровое поле '''
     print("-------------")
     for i in range(3):
         print("|", board[0 + i * 3], "|", board[1 + i * 3], "|", board[2 + i * 3], "|")
     print("-------------")
-    
+
 def win_check():
     '''Функция проверки победы'''
     for w in win_comb:
@@ -17,13 +17,13 @@ def win_check():
             return board[w[1] - 1]
     else:
         return False
-            
+
 def take_input(symbol_step):
     '''Функция отвечает за ход пользователя'''
     while True:
         value = input("Сделайте ход (введите число) для " + symbol_step + ":")
-        if not (value in '123456789'):
-            print("Ошибка ввода. Сделайте ход (введите число от 1 до 9): ")
+        if not (value in  "1, 2, 3, 4, 5, 6, 7, 8, 9"):
+            print("Ошибка ввода. Число должно быть от 1 до 9")
             continue
         value = int(value)
         if str(board[value - 1]) in "XO":
@@ -31,10 +31,10 @@ def take_input(symbol_step):
             continue
         board[value - 1] = symbol_step
         break
-    
+
 def game():
     '''Функция игрового процесса'''
-    count = 0 
+    count = 0
     while True:
         drew_doard()
         if count % 2 == 0:
@@ -45,11 +45,12 @@ def game():
             winner = win_check()
             if winner:
                 drew_doard()
-                print(winner, "WinS!")
+                print(winner, "Win!")
                 break
-        count += 1 
+        count += 1
         if count > 8:
             drew_doard()
             print("Ничья!")
-game()
+            break
 
+game()
